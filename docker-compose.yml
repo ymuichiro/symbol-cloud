@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8.0.23
+    container_name: mysql_host
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD="yes"
+      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
+      - MYSQL_USER=${MYSQL_DATABASE_USER}
+      - MYSQL_PASSWORD=${MYSQL_DATABASE_PASS}
+      - TZ='Asia/Tokyo'
+    volumes: 
+      - ./db/conf:/etc/mysql/conf.d/:ro
+      - ./db/logs:/var/log/mysql:rw
+      - ./db/data:/var/lib/mysql
+    command: --secure-file-priv="/"
+    networks:
+      - app-network
+    ports:
+      - "3306:3306"
+
+  app1:
+    container_name: test-strapi
+    image: strapi-sample 
+    tty: true
+    entrypoint:
+      - sh
+    environment:
+      - DATABASE_HOST=mysql_host
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=${MYSQL_DATABASE_NAME}
+      - DATABASE_USER=${MYSQL_DATABASE_USER}
+      - DATABASE_PASS=${MYSQL_DATABASE_PASS}
+    networks:
+      - app-network
+    ports:
+      - "1337:1337"
+      - "3000:3000"
+    depends_on:
+      - db
+
+networks:
+  app-network:
+    driver: bridge
+
