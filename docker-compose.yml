@@ -14,30 +14,43 @@ services:
       - ./db/conf:/etc/mysql/conf.d/:ro
       - ./db/logs:/var/log/mysql:rw
       - mysql:/var/lib/mysql
-    # command: --secure-file-priv="/"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "mysql",
+          "-pmysql"
+        ]
+      timeout: 20s
+      retries: 10
+    command: --secure-file-priv="/"
     networks:
       - app-network
     ports:
       - "3306:3306"
-  # app1:
-  #   container_name: test-strapi
-  #   image: strapi-sample 
-  #   tty: true
-  #   entrypoint:
-  #     - sh
-  #   environment:
-  #     - DATABASE_HOST=mysql_host
-  #     - DATABASE_PORT=3306
-  #     - DATABASE_NAME=${MYSQL_DATABASE_NAME}
-  #     - DATABASE_USER=${MYSQL_DATABASE_USER}
-  #     - DATABASE_PASS=${MYSQL_DATABASE_PASS}
-  #   networks:
-  #     - app-network
-  #   ports:
-  #     - "1337:1337"
-  #     - "3000:3000"
-  #   depends_on:
-  #     - db
+  app1:
+    container_name: test-strapi
+    image: strapi-sample
+    tty: true
+    environment:
+      - DATABASE_HOST=mysql_host
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=${MYSQL_DATABASE_NAME}
+      - DATABASE_USER=${MYSQL_DATABASE_USER}
+      - DATABASE_PASS=${MYSQL_DATABASE_PASS}
+    networks:
+      - app-network
+    ports:
+      - "1337:1337"
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
 
 networks:
   app-network:

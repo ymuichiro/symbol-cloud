@@ -1,5 +1,5 @@
-CONTAINER_NAME = 9ea96e34b8f6
-DB_NAME = mysql
+CONTAINER_NAME = 7f7f741372ba
+DB_NAME = main
 
 # データベースをダンプ（実行後待ち受けになるのでパスワードを打つこと
 dump:
