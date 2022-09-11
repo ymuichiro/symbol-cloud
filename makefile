@@ -1,5 +1,5 @@
-CONTAINER_NAME = 7f7f741372ba
-DB_NAME = main
+CONTAINER_NAME = abbe6126ceb4
+DB_NAME = strapi
 
 # データベースをダンプ（実行後待ち受けになるのでパスワードを打つこと
 dump:

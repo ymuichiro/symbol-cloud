@@ -2,3 +2,5 @@
 db/logs/**
 db/data/**
 backup.sql
+symbol-cloud.env
+symbol-cloud-db.env
