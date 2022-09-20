@@ -32,7 +32,7 @@ services:
 
   app1:
     container_name: symbol_web
-    image: ghcr.io/ymuichiro/symbol_web
+    image: ghcr.io/ymuichiro/symbol_web:latest
     tty: true
     env_file:
       - symbol-cloud.env
