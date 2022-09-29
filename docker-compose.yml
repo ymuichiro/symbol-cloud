@@ -36,6 +36,8 @@ services:
     tty: true
     env_file:
       - symbol-cloud.env
+    volumes:
+      - /home/admin/symbol-cloud/uploads:/workspace/backend/public/uploads
     networks:
       - app-network
     ports:
