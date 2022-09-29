@@ -20,5 +20,9 @@ frontendUpdate:
 allDelete:
 	docker compose down -v
 
+# 保存は ctrl + s
+cronedit:
+	crontab -e
+
 cronlog:
 	journalctl -f -u cron
