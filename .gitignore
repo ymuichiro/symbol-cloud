@@ -6,3 +6,4 @@ symbol-cloud.env
 symbol-cloud-db.env
 uploads
 *.log
+backup
