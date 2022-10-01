@@ -18,7 +18,7 @@ dump:
 restore:
 	docker exec -i $(CONTAINER_NAME) mysql -uroot -p $(DB_NAME) < backup.sql
 
-# command SQL_ROOT_PASSWORD="***************" make frontendUpdate
+# command SQL_ROOT_PASSWORD="***" make frontendUpdate
 frontendUpdate:
 	@echo "------------"
 	@echo "start container update"
