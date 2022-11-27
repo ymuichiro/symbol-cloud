@@ -42,7 +42,6 @@ services:
       - app-network
     ports:
       - "1337:1337"
-      - "3000:3000"
     depends_on:
       db:
         condition: service_healthy

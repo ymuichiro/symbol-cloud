@@ -30,6 +30,9 @@ frontendUpdate:
 	docker compose up -d
 	@echo "end"
 
+start:
+	docker compose up -d
+
 # （危険）全てのデータが削除されます
 allDelete:
 	docker compose down -v
